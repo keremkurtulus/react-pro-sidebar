@@ -534,7 +534,7 @@ var SubMenu = function (_a, ref) {
             suffix ? React.createElement("span", { className: "suffix-wrapper" }, suffix) : null,
             React.createElement("span", { className: "pro-arrow-wrapper" },
                 React.createElement("span", { className: "pro-arrow" }))),
-        firstchild && collapsed ? (React.createElement("div", { className: classnames({ 'has-arrow': popperarrow }) },
+        firstchild && collapsed ? (React.createElement("div", { className: classnames('pro-inner-list-item', { 'has-arrow': popperarrow }) },
             React.createElement("div", null,
                 React.createElement("ul", null, children)),
             popperarrow ? React.createElement("div", { className: "popper-arrow", "data-popper-arrow": true }) : null)) : (React.createElement(SlideDown, { closed: typeof open === 'undefined' ? closed : !open, className: "pro-inner-list-item" },

@@ -34,11 +34,9 @@ const SubMenu: React.ForwardRefRenderFunction<unknown, Props> = (
   },
   ref,
 ) => {
-
   const { collapsed } = useContext(SidebarContext);
   const [closed, setClosed] = useState(!defaultOpen);
   const referenceElement = useRef(null);
-
 
   const handleToggleSubMenu = () => {
     if (onOpenChange) onOpenChange(closed);
@@ -77,10 +75,7 @@ const SubMenu: React.ForwardRefRenderFunction<unknown, Props> = (
       </div>
 
       {firstchild && collapsed ? (
-        <div
-          className={classNames({ 'has-arrow': popperarrow })}
-        >
-          
+        <div className={classNames('pro-inner-list-item', { 'has-arrow': popperarrow })}>
           <div>
             <ul>{children}</ul>
           </div>
