@@ -48,51 +48,6 @@ const SubMenu: React.ForwardRefRenderFunction<unknown, Props> = (
     setClosed(!closed);
   };
 
-  useEffect(() => {
-    if (firstchild) {
-      if (collapsed) {
-        if (referenceElement.current && popperElement.current) {
-          popperInstance = createPopper(referenceElement.current, popperElement.current, {
-            placement: 'right',
-            strategy: 'fixed',
-            modifiers: [
-              {
-                name: 'computeStyles',
-                options: {
-                  adaptive: false,
-                },
-              },
-            ],
-          });
-        }
-
-        if (popperElRef.current) {
-          const ro = new ResizeObserver(() => {
-            if (popperInstance) {
-              popperInstance.update();
-            }
-          });
-
-          ro.observe(popperElRef.current);
-          ro.observe(referenceElement.current);
-        }
-
-        setTimeout(() => {
-          if (popperInstance) {
-            popperInstance.update();
-          }
-        }, 300);
-      }
-    }
-
-    return () => {
-      if (popperInstance) {
-        popperInstance.destroy();
-        popperInstance = null;
-      }
-    };
-  }, [collapsed, rtl, toggled]);
-
   const subMenuRef: LegacyRef<HTMLLIElement> = (ref as any) || React.createRef<HTMLLIElement>();
 
   return (
@@ -126,8 +81,7 @@ const SubMenu: React.ForwardRefRenderFunction<unknown, Props> = (
 
       {firstchild && collapsed ? (
         <div
-          ref={popperElement}
-          className={classNames('pro-inner-list-item popper-element', { 'has-arrow': popperarrow })}
+          className={classNames('pro-inner-list-item', { 'has-arrow': popperarrow })}
         >
           <div className="popper-inner" ref={popperElRef}>
             <ul>{children}</ul>
