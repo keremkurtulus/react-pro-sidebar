@@ -1,8 +1,6 @@
-import React, { useState, forwardRef, LegacyRef, useRef, useEffect, useContext } from 'react';
+import React, { useState, forwardRef, LegacyRef, useRef, useContext } from 'react';
 import classNames from 'classnames';
 import SlideDown from 'react-slidedown';
-import { createPopper } from '@popperjs/core';
-import ResizeObserver from 'resize-observer-polyfill';
 import { SidebarContext } from '../ProSidebar';
 
 export type Props = React.LiHTMLAttributes<HTMLLIElement> & {
@@ -36,12 +34,11 @@ const SubMenu: React.ForwardRefRenderFunction<unknown, Props> = (
   },
   ref,
 ) => {
-  let popperInstance;
-  const { collapsed, rtl, toggled } = useContext(SidebarContext);
+
+  const { collapsed } = useContext(SidebarContext);
   const [closed, setClosed] = useState(!defaultOpen);
-  const popperElRef = useRef(null);
   const referenceElement = useRef(null);
-  const popperElement = useRef(null);
+
 
   const handleToggleSubMenu = () => {
     if (onOpenChange) onOpenChange(closed);
@@ -81,9 +78,10 @@ const SubMenu: React.ForwardRefRenderFunction<unknown, Props> = (
 
       {firstchild && collapsed ? (
         <div
-          className={classNames('pro-inner-list-item', { 'has-arrow': popperarrow })}
+          className={classNames({ 'has-arrow': popperarrow })}
         >
-          <div className="popper-inner" ref={popperElRef}>
+          
+          <div>
             <ul>{children}</ul>
           </div>
           {popperarrow ? <div className="popper-arrow" data-popper-arrow /> : null}

@@ -521,11 +521,9 @@ var slidedown_1 = slidedown.SlideDown;
 
 var SubMenu = function (_a, ref) {
     var children = _a.children, icon = _a.icon, className = _a.className, title = _a.title, _b = _a.defaultOpen, defaultOpen = _b === void 0 ? false : _b, open = _a.open, prefix = _a.prefix, suffix = _a.suffix, firstchild = _a.firstchild, popperarrow = _a.popperarrow, onOpenChange = _a.onOpenChange, rest = __rest(_a, ["children", "icon", "className", "title", "defaultOpen", "open", "prefix", "suffix", "firstchild", "popperarrow", "onOpenChange"]);
-    var _c = React.useContext(SidebarContext), collapsed = _c.collapsed, rtl = _c.rtl, toggled = _c.toggled;
-    var _d = React.useState(!defaultOpen), closed = _d[0], setClosed = _d[1];
-    var popperElRef = React.useRef(null);
+    var collapsed = React.useContext(SidebarContext).collapsed;
+    var _c = React.useState(!defaultOpen), closed = _c[0], setClosed = _c[1];
     var referenceElement = React.useRef(null);
-    var popperElement = React.useRef(null);
     var handleToggleSubMenu = function () {
         if (onOpenChange)
             onOpenChange(closed);
@@ -543,8 +541,8 @@ var SubMenu = function (_a, ref) {
             suffix ? React__default.createElement("span", { className: "suffix-wrapper" }, suffix) : null,
             React__default.createElement("span", { className: "pro-arrow-wrapper" },
                 React__default.createElement("span", { className: "pro-arrow" }))),
-        firstchild && collapsed ? (React__default.createElement("div", { className: classnames('pro-inner-list-item', { 'has-arrow': popperarrow }) },
-            React__default.createElement("div", { className: "popper-inner", ref: popperElRef },
+        firstchild && collapsed ? (React__default.createElement("div", { className: classnames({ 'has-arrow': popperarrow }) },
+            React__default.createElement("div", null,
                 React__default.createElement("ul", null, children)),
             popperarrow ? React__default.createElement("div", { className: "popper-arrow", "data-popper-arrow": true }) : null)) : (React__default.createElement(SlideDown, { closed: typeof open === 'undefined' ? closed : !open, className: "pro-inner-list-item" },
             React__default.createElement("div", null,
