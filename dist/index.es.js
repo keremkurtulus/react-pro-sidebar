@@ -544,12 +544,9 @@ var SubMenu = function (_a, ref) {
             suffix ? React.createElement("span", { className: "suffix-wrapper" }, suffix) : null,
             React.createElement("span", { className: "pro-arrow-wrapper" },
                 React.createElement("span", { className: "pro-arrow" }))),
-        firstchild && collapsed ? (React.createElement("div", { ref: popperElement, className: classnames('pro-inner-list-item popper-element', { 'has-arrow': popperarrow }) },
-            React.createElement("div", { className: "popper-inner", ref: popperElRef },
-                React.createElement("ul", null, children)),
-            popperarrow ? React.createElement("div", { className: "popper-arrow", "data-popper-arrow": true }) : null)) : (React.createElement(SlideDown, { closed: typeof open === 'undefined' ? closed : !open, className: "pro-inner-list-item" },
+        React.createElement(SlideDown, { closed: typeof open === 'undefined' ? closed : !open, className: "pro-inner-list-item" },
             React.createElement("div", null,
-                React.createElement("ul", null, children))))));
+                React.createElement("ul", null, children)))));
 };
 var SubMenu$1 = forwardRef(SubMenu);
 
