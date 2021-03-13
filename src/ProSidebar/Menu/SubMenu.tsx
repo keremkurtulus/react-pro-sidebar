@@ -1,6 +1,9 @@
-import React, { useState, forwardRef, LegacyRef, useRef, useContext } from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import React, { useState, forwardRef, LegacyRef, useRef, useEffect, useContext } from 'react';
 import classNames from 'classnames';
 import SlideDown from 'react-slidedown';
+import { createPopper } from '@popperjs/core';
+import ResizeObserver from 'resize-observer-polyfill';
 import { SidebarContext } from '../ProSidebar';
 
 export type Props = React.LiHTMLAttributes<HTMLLIElement> & {
@@ -34,14 +37,26 @@ const SubMenu: React.ForwardRefRenderFunction<unknown, Props> = (
   },
   ref,
 ) => {
-  const { collapsed } = useContext(SidebarContext);
+  let popperInstance;
+  const { collapsed, rtl, toggled } = useContext(SidebarContext);
   const [closed, setClosed] = useState(!defaultOpen);
+  const popperElRef = useRef(null);
   const referenceElement = useRef(null);
+  const popperElement = useRef(null);
 
   const handleToggleSubMenu = () => {
     if (onOpenChange) onOpenChange(closed);
     setClosed(!closed);
   };
+
+  useEffect(() => {
+    if (firstchild) {
+      if (collapsed) {
+        // eslint-disable-next-line no-console
+        console.log('menu action');
+      }
+    }
+  }, [collapsed, rtl, toggled]);
 
   const subMenuRef: LegacyRef<HTMLLIElement> = (ref as any) || React.createRef<HTMLLIElement>();
 
@@ -75,8 +90,11 @@ const SubMenu: React.ForwardRefRenderFunction<unknown, Props> = (
       </div>
 
       {firstchild && collapsed ? (
-        <div className={classNames('pro-inner-list-item', { 'has-arrow': popperarrow })}>
-          <div>
+        <div
+          ref={popperElement}
+          className={classNames('pro-inner-list-item popper-element', { 'has-arrow': popperarrow })}
+        >
+          <div className="popper-inner" ref={popperElRef}>
             <ul>{children}</ul>
           </div>
           {popperarrow ? <div className="popper-arrow" data-popper-arrow /> : null}
